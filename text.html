@@ -64,7 +64,13 @@
 </div>
 
 <script>
-    const userId = generateId();
+    let userId = localStorage.getItem('userId');
+
+    if (!userId) {
+        userId = generateId();
+        localStorage.setItem('userId', userId);
+    }
+
     document.getElementById('user-id').innerText = userId;
 
     const messages = [];
