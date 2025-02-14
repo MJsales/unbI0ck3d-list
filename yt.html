@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch YouTube as Guest</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        iframe {
-            width: 80%;
-            height: 80%;
-            border: none;
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-    <iframe src="https://www.youtube.com/watch?v=ZbpZ2KkqeFg&pp=ygUIZm9ydG5pdGU%3D" allowfullscreen></iframe>
-    <script>
-        // Optional: You can add functionality here if needed
-    </script>
-</body>
-</html>
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
+
+const app = express();
+
+// Load your SSL certificate
+const options = {
+  key: fs.readFileSync('key.pem'),
+  cert: fs.readFileSync('cert.pem')
+};
+
+// Route to serve a YouTube video
+app.get('/video', (req, res) => {
+  const videoId = req.query.id; // Get video ID from query params
+  if (videoId) {
+    const videoUrl = `https://www.youtube.com/embed/${videoId}`;
+    res.redirect(videoUrl); // Redirect to YouTube embed
+  } else {
+    res.status(400).send('Video ID is required');
+  }
+});
+
+// Start HTTPS server
+https.createServer(options, app).listen(3000, () => {
+  console.log('Server running on https://localhost:3000');
+});
