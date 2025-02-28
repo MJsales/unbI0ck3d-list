@@ -1,27 +1,26 @@
-const express = require('express');
-const https = require('https');
-const fs = require('fs');
-
-const app = express();
-
-// Load your SSL certificate
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
-
-// Route to serve a YouTube video
-app.get('/video', (req, res) => {
-  const videoId = req.query.id; // Get video ID from query params
-  if (videoId) {
-    const videoUrl = `https://www.youtube.com/embed/${videoId}`;
-    res.redirect(videoUrl); // Redirect to YouTube embed
-  } else {
-    res.status(400).send('Video ID is required');
-  }
-});
-
-// Start HTTPS server
-https.createServer(options, app).listen(3000, () => {
-  console.log('Server running on https://localhost:3000');
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Video Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Watch My Favorite Gaming Video</h1>
+    <iframe src="https://www.youtube.com/watch?v=09DXt_4w1ew&pp=ygULcG9wdWxhcm1tb3M%3D" allowfullscreen></iframe>
+    <p>Replace "VIDEO_ID" with the actual ID of the YouTube video you want to watch.</p>
+</body>
+</html>
