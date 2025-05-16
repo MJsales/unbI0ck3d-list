@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch YouTube Video with VLC</title>
+    <title>YouTube Video Embed</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
-            background-color: #f1f1f1;
+            background-color: #f4f4f4;
+        }
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
         }
     </style>
 </head>
 <body>
-    <h1>How to Watch the Video</h1>
-    <p>To watch the YouTube video directly, follow these steps:</p>
-    <ol>
-        <li>Open VLC Media Player.</li>
-        <li>Go to <strong>Media</strong> > <strong>Open Network Stream</strong>.</li>
-        <li>Paste the following URL:</li>
-        <pre>https://www.youtube.com/watch?v=zLODRvdrcco</pre>
-        <li>Click <strong>Play</strong>.</li>
-    </ol>
+    <iframe 
+        src="https://www.youtube.com/watch?v=zLODRvdrcco" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
 </body>
 </html>
